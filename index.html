@@ -1,0 +1,633 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Q1.Write one function how you can write a call back function</h1>
+    <pre>
+
+function mainfunction(cb){
+    let data={a:1,b:2}
+    console.log("Hello from main function");
+    cb(data);
+}
+function callback(x){
+    console.log(x);
+}
+mainfunction(callback)
+
+Output:
+Hello from main function
+{ a: 1, b: 2 }
+</pre>
+    <h1>Q2.Write a callback function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 2 should be printed after 2 sec, 3 should be printed after 3 sec, and so on. 
+
+Explain callback hell.
+Numbers
+1
+2
+3
+4
+5
+6
+7
+</h1>
+    <pre>
+let i=1;
+setTimeout(()=>{
+    console.log(i)
+    setTimeout(()=>{
+        console.log(++i)
+            setTimeout(()=>{
+                console.log(++i)
+                    setTimeout(()=>{
+                        console.log(++i)
+                            setTimeout(()=>{
+                                console.log(++i)
+                                    setTimeout(()=>{
+                                        console.log(++i)
+                                                setTimeout(()=>{
+                                                    console.log(++i)
+                                                         },i*1000)
+                                                    },i*1000)
+                                                },i*1000)
+                                            },i*1000)
+                                        },i*1000)
+                    },i*1000)
+},i*1000)
+   Output:
+1
+2
+3
+4
+5
+6
+7
+Nesting multiple callbacks one inside other is called as callback hell.Because it is difficult to maintain & difficuly for reading
+</pre>
+    <h1>Q3.Write the promise function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 2 should be printed after 2 sec, 3 should be printed after 3 sec, and so on. 
+Numbers
+1
+2
+3
+4
+5
+6
+7
+</h1>
+    <pre>
+var num=0;
+
+let time=(ms)=>{
+    return new Promise((resolve,reject)=>{
+        if(num=>0){
+            setTimeout(()=>{resolve(console.log(++num))},ms)
+        }
+    })
+
+}
+time(1000)
+.then(()=>{ time(3000)})
+.then(()=>{time(6000)})
+.then(()=>{time(10000)})
+.then(()=>{time(15000)})
+.then(()=>{time(21000)})
+.then(()=>{time(28000)})
+
+   Output:
+1
+2
+3
+4
+5
+6
+7
+</pre>
+    <h1>Create a promise function accepting an argument, if yes is passed to the function then it should go to resolved state and print Promise Resolved, and if nothing is passed 
+then it should go to reject the state and catch the error and print Promise Rejected 
+</h1>
+<pre>let result=(args)=>{
+    return new Promise((resolve,reject)=>{
+        if(args){
+            resolve(
+               console.log("Promise resolved ")
+                )
+        }
+        else{
+            reject(console.log("Promise rejected"))
+        }
+    })
+
+}
+console.log("Hello");
+result("yes")
+
+Output:
+Hello
+Promise resolved
+</pre>
+<h1>Q5.Create examples to explain callback function</h1>
+<pre>
+    Example1.
+Cllbacks are simple,a function passed into another function as an argument,and is dependent on the function that is passed to 
+Callback function with zero arguments.Every time a function is called a new Execution context is created and gives the result
+function mainfunc(cb){
+    console.log("Hello from main func");
+    cb();
+}
+function callback(){
+    console.log("I am the super hero of the moment.Yeah I'm Callback");
+}
+mainfunc(callback);
+Output
+Hello from main func
+I am the super hero of the moment.Yeah I'm Callback
+
+Example2
+Callback with 1 or more than one argument in it;
+    
+    
+    function mainfunc(cb,cb2){
+        let data={name:"vamshi",age:23}
+        let data2={name:"vivek",age:23}
+        console.log("Hello from main func");
+        cb(data);
+        cb2(data2)
+    }
+    function callback(x){
+      
+        console.log("I am the super hero at the moment.Yeah I'm Callback");
+        console.log(x);
+    }
+       function callback2(x){
+      
+        console.log("I am the super hero at the moment.Yeah I'm Callback");
+        console.log(x);
+    }
+    
+    mainfunc(callback,callback2);
+    Output
+    Hello from main func
+I am the super hero at the moment.Yeah I'm Callback
+{ name: 'vamshi', age: 23 }
+I am the super hero at the moment.Yeah I'm Callback
+{ name: 'vivek', age: 23 }
+
+</pre>
+<h1>Q6.Create examples to explain callback hell function</h1>
+<pre>
+    Nesting of one callback inside another callback is called as callback Hell.
+    It is working asynchronously .Like meanwhile the other tasks are running 
+    in parallel.But it affect the readability of developer and is difficult to maintain
+   Example 1.
+    let i=1;
+console.log("Hi,I am at line num 1");
+setTimeout(()=>{
+    console.log(i)
+    setTimeout(()=>{
+        console.log(++i)
+            setTimeout(()=>{
+                console.log(++i)
+                    setTimeout(()=>{
+                        console.log(++i)
+                            setTimeout(()=>{
+                                console.log(++i)
+                                    setTimeout(()=>{
+                                        console.log(++i)
+                                                setTimeout(()=>{
+                                                    console.log(++i)
+                                                         },i*1000)
+                                                    },i*1000)
+                                                },i*1000)
+                                            },i*1000)
+                                        },i*1000)
+                    },i*1000)
+},i*1000)
+
+console.log("I am at last line");
+Output:
+Hi,I am at line num 1
+I am at last line
+1
+2
+3
+4
+5
+6
+7
+</pre>
+<h1>Q7.Create examples to explain promises function</h1>
+<pre>
+    Promises are best alternatives for callbacks.
+    Their way of coding is easy to maintain and it is also possible to catch errors
+    Example:Promises with one argument
+    var num=0;
+
+let time=(ms)=>{
+    return new Promise((resolve,reject)=>{
+        if(num=>0){
+            setTimeout(()=>{resolve(console.log(++num))},ms)
+        }
+    })
+
+}
+time(1000)
+.then(()=>{return time(2000)})
+.then(()=>{return time(3000)})
+.then(()=>{return time(4000)})
+.then(()=>{return time(5000)})
+.then(()=>{return time(6000)})
+.then(()=>{return time(7000)})
+
+   Output:
+1
+2
+3
+4
+5
+6
+7
+Example :Promises with no argument
+let x=2;
+const myPromise=new Promise((resolve,reject)=>{
+    if(x===2){
+        setTimeout(()=>{resolve('foo')},1000)
+    }
+    else{
+        reject(console.log("data does not exist"))
+    }
+})
+myPromise
+.then((value)=>`${value} and bar` )
+.then((value)=>`${value} and bar again ` )
+.then((value)=>`${value} and again` )
+.then((value)=>`${value} and bar` )
+.then((value)=>console.log(value))
+.catch((error)=>{
+    console.log("We cannot do anything");
+})
+.finally(()=>{
+    console.log("Program ended");
+})
+</pre>
+<h1>Q8.Create examples to explain async await function</h1>
+<pre>
+    Example1:
+Here we have stored a promise inside the variable
+const choice=new Promise((resolve,reject)=>{
+    
+        setTimeout(()=>{resolve(console.log("your choice is best"))}
+        ,3000)
+    
+})
+async function asynchronous(){
+    try{console.log('a')
+    console.log('b')
+    await choice;
+    console.log('c')
+    console.log('d')
+    console.log('e')
+        }
+        catch(err){
+            console.log("error")
+        }
+        finally{
+            console.log("All tasks completed");
+        }
+}
+asynchronous()
+console.log("doing multiple tasks parallely")
+Output:
+a
+b
+doing multiple tasks parallely
+your choice is best
+c
+d
+e
+All tasks completed
+In the above code as a,b are executed and time delay of 3s happens so the doing multiple tasks parallely is executed
+ and then setTimeout is logged and the rest of the code is logged
+Example2:
+Here we are returning promise inside a function and getting the result
+function choice(){
+   return new Promise((resolve,reject)=>{
+    
+        setTimeout(()=>{resolve(console.log("your choice is best"))}
+        ,3000)
+    
+})}
+async function asynchronous(){
+    try{console.log('a')
+    console.log('b')
+    await choice();
+    console.log('c')
+    console.log('d')
+    console.log('e')
+        }
+        catch(err){
+            console.log("error")
+        }
+        finally{
+            console.log("All tasks completed");
+        }
+}
+asynchronous()
+console.log("doing multiple tasks parallely")
+
+Output:
+a
+b
+doing multiple tasks parallely
+your choice is best
+c
+d
+e
+All tasks completed
+Example:Now we are passing an argument in await function 
+let is_shop_open=true;
+let itemsinshop={
+    cooldrinks:["pepsi","cococola"],
+    chips:["lays","bingo"]
+}
+function time(ms){
+    return new Promise((resolve,reject)=>{
+        if(is_shop_open){
+            setTimeout(resolve,ms)
+        }
+        else{
+            reject(console.log("We are sorry, the shop is closed"))
+        }
+    })
+}
+async function logingdetails(){
+   try{
+       await time(1000)
+    console.log(`I want to drink ${itemsinshop.cooldrinks[0]}`)
+       console.log(`11111`)
+    await time(1000)
+    console.log(`I would also like  to eat ${itemsinshop.chips[0]}`)
+   } 
+   catch(error){
+       console.log("We would like you to see the next time")
+   }
+   finally{
+       console.log("Good Bye!Take Care")
+   }
+    
+}
+logingdetails();
+Output:
+I want to drink pepsi
+11111
+I would also like  to eat lays
+Good Bye!Take Care
+
+<h1>Q9.Create examples to explain promise.all function
+</h1>
+<pre>
+    const p1 = Promise.resolve("pi"); //returns a promise of resolved value "pi"
+const p2 = 3.14; 
+const p3 = new Promise((resolve, reject) => { //promise method to resolve or reject values
+    resolve("Maths"); //p3 contains a promise of resolving "maths" value 
+});
+
+let returned_promise = Promise.all([p1, p2, p3]); //checking fulfillment or rejection of any of the promises: p1,p2 and p3 passed as iterable in the function 
+
+returned_promise.then((array)=>{ //returned_promise will contain final returned value of Promise.all() method
+    console.log(array); //checking and printing the value returned as promised by Promise.all() method in JS
+})
+
+
+In the above code the Promise.all() will be executed if all the promises are resolved ,else it will not be executed
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre></body>
+</html>
